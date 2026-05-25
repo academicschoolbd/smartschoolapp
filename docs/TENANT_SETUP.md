@@ -111,9 +111,9 @@ clean "Coming soon" placeholder.
 | Library        | `<host>/library`                                | 🔒   |
 | Transport      | `<host>/transport`                              | 🔒   |
 | Hostel         | `<host>/hostel`                                 | 🔒   |
-| Sports         | _Coming soon (no Ramom equivalent)_             | —    |
-| Science Lab    | _Coming soon_                                   | —    |
-| Computer Lab   | _Coming soon_                                   | —    |
+| Sports         | Native facility screen → links to Gallery       |      |
+| Science Lab    | Native facility screen → links to Gallery       |      |
+| Computer Lab   | Native facility screen → links to Gallery       |      |
 
 ### Important
 
@@ -170,6 +170,15 @@ clean "Coming soon" placeholder.
   in the quick-actions FAB. It calls Google's Play In-App Review API; on
   side-loaded or non-Play builds it falls back to opening the Play Store
   listing for the package.
+- **Native facility screens (Sports / Science Lab / Computer Lab)** —
+  Ramom Smart School has no dedicated backend URL for these, so the app
+  renders them as native editorial pages (hero image, tagline, quick-facts
+  cards, highlights list, "See photos in school gallery" CTA). To customize
+  for a new tenant, edit `FacilityProfiles.sports / scienceLab / computerLab`
+  in
+  [`FacilityInfoScreen.kt`](../app/src/main/java/com/schoolnav/app/ui/screens/FacilityInfoScreen.kt)
+  — change the photo URL, tagline, facts and highlights. No URL or nav-graph
+  edits are needed.
 - **Public vs. authenticated views** — Signed-out visitors only see the public
   side of the portal: News, Teachers, Gallery, About, Contact, Exam Results,
   Admit Card, Principal Message, Calendar pages that don't require login, etc.

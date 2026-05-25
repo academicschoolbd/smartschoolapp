@@ -107,8 +107,10 @@ fun Destination.webPage(): WebPage = when (this) {
 
     // ── Resources ──────────────────────────────────────────────────────────
     Destination.Library -> WebPage.Authenticated("library")
-    // Sports / labs are not standalone pages on the Ramom backend.
-    // They get a clean placeholder so the button never opens a broken URL.
+    // Sports / labs have no Ramom URL — they're rendered by FacilityInfoScreen
+    // as native content pages. The Placeholder mapping here is unreachable
+    // because the nav graph routes those destinations directly to the native
+    // screen, but we keep it as a safe default in case the routing changes.
     Destination.Sports -> WebPage.Placeholder
     Destination.Transport -> WebPage.Authenticated("transport")
     Destination.Hostel -> WebPage.Authenticated("hostel")
