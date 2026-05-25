@@ -5,15 +5,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -40,36 +38,45 @@ fun SectionHeader(title: String, modifier: Modifier = Modifier) {
 }
 
 /**
- * Renders a [HomeSection] as a header + non-scrollable grid of [GridButton]s.
- * The grid uses [LazyVerticalGrid] with `userScrollEnabled = false` so the parent
- * `LazyColumn` in `HomeScreen` owns vertical scrolling for the whole page.
+ * Renders a [HomeSection] as a header + a static grid of [GridButton]s.
+ *
+ * Implemented as a [Column] of [Row]s (one row per `columns` items) instead of
+ * `LazyVerticalGrid`, so each tile gets a fixed height and labels are never
+ * clipped. The grid does not scroll on its own — the parent `LazyColumn` in
+ * `HomeScreen` owns vertical scrolling for the whole page.
  */
 @Composable
 fun GridSection(
     section: HomeSection,
     onItemClick: (GridItem) -> Unit,
     columns: Int = 3,
-    tileSize: androidx.compose.ui.unit.Dp = 116.dp,
     modifier: Modifier = Modifier,
 ) {
-    val rows = (section.items.size + columns - 1) / columns
     val gap = 12.dp
-    val totalHeight = tileSize * rows + gap * (rows - 1).coerceAtLeast(0)
-
-    Column(modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(gap),
+    ) {
         SectionHeader(title = section.title)
-        Spacer(modifier = Modifier.height(12.dp))
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns),
-            verticalArrangement = Arrangement.spacedBy(gap),
-            horizontalArrangement = Arrangement.spacedBy(gap),
-            userScrollEnabled = false,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(totalHeight),
-        ) {
-            items(section.items) { item ->
-                GridButton(item = item, onClick = { onItemClick(item) })
+        section.items.chunked(columns).forEach { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(gap),
+                verticalAlignment = Alignment.Top,
+            ) {
+                rowItems.forEach { item ->
+                    GridButton(
+                        item = item,
+                        onClick = { onItemClick(item) },
+                        modifier = Modifier.weight(1f),
+                    )
+                }
+                // Fill any empty trailing slots so the last row aligns with full rows.
+                repeat(columns - rowItems.size) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
             }
         }
     }
@@ -83,8 +90,7 @@ fun GridButton(
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(1f)
+            .height(118.dp)
             .clip(RoundedCornerShape(20.dp))
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(20.dp),
@@ -95,15 +101,15 @@ fun GridButton(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
+                .fillMaxSize()
+                .padding(horizontal = 8.dp, vertical = 10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterVertically),
         ) {
             Box(
                 modifier = Modifier
-                    .size(46.dp)
-                    .clip(RoundedCornerShape(14.dp))
+                    .size(40.dp)
+                    .clip(RoundedCornerShape(12.dp))
                     .background(item.tint.copy(alpha = 0.16f)),
                 contentAlignment = Alignment.Center,
             ) {
@@ -113,7 +119,6 @@ fun GridButton(
                     tint = item.tint,
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = item.label,
                 style = MaterialTheme.typography.labelLarge,

@@ -5,6 +5,12 @@ A modern Android app for a school's mobile dashboard, built with **Kotlin + Jetp
 ## Features
 
 - Splash screen (using `androidx.core.splashscreen`, displays before the activity is fully ready)
+- **Material 3 chrome** that wraps every screen:
+  - **Top app bar** with menu/back button and a theme-mode action button
+  - **Navigation drawer** (hamburger menu) listing every destination grouped by section
+  - **Bottom navigation bar** with Home / Notice / About root tabs
+  - **Floating action button** on Home that posts a demo in-app notification
+- **Dark / light / system** theme switching — tap the brightness icon in the top app bar to cycle System → Light → Dark
 - Modern **home screen** with:
   - Auto-scrolling **top banner** (infinite `HorizontalPager`, 4-second auto-advance, animated indicator)
   - **Academic** section grid — Result, Student List, Class Details, Latest Activity, Class Routine, Exam Routine
@@ -75,7 +81,7 @@ The repo ships with a **placeholder** `app/google-services.json`. The app will c
 
 From the Firebase console: **Messaging → New campaign → Notification**, target your app and send. The user will see:
 - The system notification in the tray.
-- The **floating in-app banner** (when the app is in the foreground), which is also triggered by `FloatingNotificationCenter.post(...)` from anywhere in the app — try tapping the bell icon in the home screen header to see it.
+- The **floating in-app banner** (when the app is in the foreground), which is also triggered by `FloatingNotificationCenter.post(...)` from anywhere in the app — tap the floating action button on the home screen to preview it.
 
 ## Project structure
 
@@ -89,9 +95,9 @@ app/src/main/java/com/schoolnav/app/
 │   └── SchoolFirebaseMessagingService.kt
 └── ui/
     ├── SchoolNavApp.kt              # Root composable: theme + nav graph + floating overlay
-    ├── theme/                       # Material 3 colors, typography (Tiro Bangla)
-    ├── navigation/                  # Destination enum + NavHost
-    ├── components/                  # TopBanner, GridSection, FloatingNotification
+    ├── theme/                       # Material 3 colors, typography (Tiro Bangla), ThemeStateHolder
+    ├── navigation/                  # Destination enum, bottom tabs, NavHost
+    ├── components/                  # TopBanner, GridSection, AppDrawer, BottomNavBar, FloatingNotification
     └── screens/                     # HomeScreen, DemoScreen
 ```
 

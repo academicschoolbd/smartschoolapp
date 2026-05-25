@@ -42,12 +42,24 @@ private val DarkColors = darkColorScheme(
     outline = md_dark_outline,
 )
 
+/**
+ * Resolves the effective dark/light flag from a [ThemeMode] preference, falling
+ * back to the system setting for [ThemeMode.System].
+ */
+@Composable
+fun ThemeMode.isDark(): Boolean = when (this) {
+    ThemeMode.System -> isSystemInDarkTheme()
+    ThemeMode.Light -> false
+    ThemeMode.Dark -> true
+}
+
 @Composable
 fun SchoolNavTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themeMode: ThemeMode = ThemeMode.System,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit,
 ) {
+    val darkTheme = themeMode.isDark()
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
