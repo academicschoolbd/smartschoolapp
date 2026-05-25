@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Login
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material.icons.filled.Menu
@@ -32,7 +34,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.collectAsState
+import com.schoolnav.app.auth.SessionState
+import com.schoolnav.app.auth.rememberAuthViewModel
 import com.schoolnav.app.notifications.FloatingNotificationCenter
+import com.schoolnav.app.tenant.ActiveTenant
 import com.schoolnav.app.ui.components.AppDrawer
 import com.schoolnav.app.ui.components.BottomNavBar
 import com.schoolnav.app.ui.components.FloatingNotificationHost
@@ -65,7 +71,11 @@ fun SchoolNavApp(onAppReady: () -> Unit = {}) {
             val currentRoute = backStackEntry?.destination?.route
             val currentDestination = Destination.fromRoute(currentRoute)
             val isRootTab = isRootTabRoute(currentRoute)
-            val title = currentDestination?.title ?: "School Nav"
+            val title = currentDestination?.title ?: ActiveTenant.displayName
+
+            val authVm = rememberAuthViewModel()
+            val session by authVm.session.collectAsState()
+            val isSignedIn = session is SessionState.SignedIn
 
             fun navigateTo(destination: Destination) {
                 navController.navigate(destination.route) {
@@ -83,10 +93,22 @@ fun SchoolNavApp(onAppReady: () -> Unit = {}) {
                 drawerContent = {
                     AppDrawer(
                         currentRoute = currentRoute,
+                        isSignedIn = isSignedIn,
+                        signedInDisplayName = (session as? SessionState.SignedIn)?.displayName,
                         onDestinationClick = { destination ->
                             scope.launch { drawerState.close() }
                             navigateTo(destination)
                         },
+                        onSignInClick = {
+                            scope.launch { drawerState.close() }
+                            navigateTo(Destination.Login)
+                        },
+                        onSignOutClick = {
+                            scope.launch { drawerState.close() }
+                            authVm.signOut()
+                        },
+                        schoolName = ActiveTenant.displayName,
+                        schoolTagline = ActiveTenant.tagline,
                     )
                 },
             ) {
@@ -121,6 +143,21 @@ fun SchoolNavApp(onAppReady: () -> Unit = {}) {
                                     }
                                 },
                                 actions = {
+                                    if (isSignedIn) {
+                                        IconButton(onClick = { authVm.signOut() }) {
+                                            Icon(
+                                                imageVector = Icons.AutoMirrored.Filled.Logout,
+                                                contentDescription = "Sign out",
+                                            )
+                                        }
+                                    } else if (currentRoute != Destination.Login.route) {
+                                        IconButton(onClick = { navigateTo(Destination.Login) }) {
+                                            Icon(
+                                                imageVector = Icons.AutoMirrored.Filled.Login,
+                                                contentDescription = "Sign in",
+                                            )
+                                        }
+                                    }
                                     IconButton(onClick = { themeState.cycle() }) {
                                         Icon(
                                             imageVector = when (themeState.mode) {
