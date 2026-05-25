@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">School Nav</string>
+    <string name="default_notification_channel_id">school_nav_default</string>
+    <string name="default_notification_channel_name">General notifications</string>
+    <string name="default_notification_channel_description">Announcements, results, and class updates</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Welcome back</string>
+    <string name="home_subtitle">Your school dashboard</string>
+    <string name="section_academic">Academic</string>
+    <string name="section_teacher">Teacher</string>
+    <string name="section_important">Important</string>
+
+    <!-- Academic -->
+    <string name="nav_result">Result</string>
+    <string name="nav_student_list">Student List</string>
+    <string name="nav_class_details">Class Details</string>
+    <string name="nav_latest_activity">Latest Activity</string>
+    <string name="nav_class_routine">Class Routine</string>
+    <string name="nav_exam_routine">Exam Routine</string>
+
+    <!-- Teacher -->
+    <string name="nav_teacher_list">Teacher List</string>
+    <string name="nav_mark_entry">Mark Entry</string>
+
+    <!-- Important -->
+    <string name="nav_notice">Notice Board</string>
+    <string name="nav_events">Events</string>
+    <string name="nav_contact">Contact</string>
+    <string name="nav_about">About School</string>
+</resources>
