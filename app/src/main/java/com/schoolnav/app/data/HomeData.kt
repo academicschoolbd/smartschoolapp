@@ -4,18 +4,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Announcement
 import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.automirrored.filled.Chat
-import androidx.compose.material.icons.automirrored.filled.Grading
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.Message
 import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Apartment
-import androidx.compose.material.icons.filled.Badge
 import androidx.compose.material.icons.filled.BeachAccess
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Campaign
-import androidx.compose.material.icons.filled.CardMembership
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Computer
 import androidx.compose.material.icons.filled.DirectionsBus
@@ -23,7 +19,6 @@ import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.EditNote
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Event
-import androidx.compose.material.icons.filled.EventAvailable
 import androidx.compose.material.icons.filled.EventBusy
 import androidx.compose.material.icons.filled.Grade
 import androidx.compose.material.icons.filled.Groups
@@ -124,18 +119,6 @@ object HomeData {
         ),
     )
 
-    val studentCorner = HomeSection(
-        title = "Student Corner",
-        items = listOf(
-            GridItem("My Profile", Icons.Filled.AccountCircle, BrandBlue, Destination.MyProfile),
-            GridItem("My Attendance", Icons.Filled.EventAvailable, BrandGreen, Destination.MyAttendance),
-            GridItem("My Marks", Icons.AutoMirrored.Filled.Grading, BrandPurple, Destination.MyMarks),
-            GridItem("Fees", Icons.Filled.Payments, BrandOrange, Destination.Fees),
-            GridItem("ID Card", Icons.Filled.Badge, BrandPink, Destination.IdCard),
-            GridItem("Library Card", Icons.Filled.CardMembership, BrandTeal, Destination.LibraryCard),
-        ),
-    )
-
     val communication = HomeSection(
         title = "Communication",
         items = listOf(
@@ -177,7 +160,6 @@ object HomeData {
     val allSections: List<HomeSection> = listOf(
         academic,
         teacher,
-        studentCorner,
         communication,
         resources,
         important,

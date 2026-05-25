@@ -13,18 +13,16 @@ import com.schoolnav.app.ui.components.GridSection
 import com.schoolnav.app.ui.components.NoticeStrip
 import com.schoolnav.app.ui.components.QuickStatsRow
 import com.schoolnav.app.ui.components.TopBanner
-import com.schoolnav.app.ui.components.WelcomeHeader
 import com.schoolnav.app.ui.navigation.Destination
 
 /**
  * Home dashboard. From top to bottom:
  *
- * 1. Greeting header with avatar + role badge
- * 2. Auto-scrolling banner pager
- * 3. Quick-stats horizontal row
- * 4. Recent Notices preview strip
- * 5. Academic / Teacher / Student Corner / Communication / Resources /
- *    Important grid sections (each renders via [GridSection])
+ * 1. Auto-scrolling banner pager
+ * 2. School-wide quick-stats row
+ * 3. Recent Notices preview strip
+ * 4. Academic / Teacher / Communication / Resources / Important grid sections
+ *    (each renders via [GridSection])
  *
  * Scrolling is owned by this LazyColumn; the parent Scaffold supplies all
  * surrounding chrome (top app bar, bottom nav, FAB).
@@ -36,7 +34,6 @@ fun HomeScreen(onNavigate: (Destination) -> Unit) {
         contentPadding = PaddingValues(top = 8.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        item { WelcomeHeader() }
         item { TopBanner(items = HomeData.bannerItems) }
         item { QuickStatsRow(onItemClick = onNavigate) }
         item {
