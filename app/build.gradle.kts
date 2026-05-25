@@ -99,4 +99,8 @@ dependencies {
 
     // Swipe-to-refresh wrapping the WebView in each feature screen
     implementation(libs.androidx.swiperefreshlayout)
+
+    // Google Play In-App Review — drives the "Rate us" prompt
+    implementation(libs.play.review)
+    implementation(libs.play.review.ktx)
 }

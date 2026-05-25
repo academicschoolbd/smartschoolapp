@@ -126,4 +126,34 @@ fun Destination.webPage(): WebPage = when (this) {
     Destination.OnlineExam -> WebPage.Authenticated("online_exam")
     Destination.Profile -> WebPage.Authenticated("profile")
     Destination.Dashboard -> WebPage.Authenticated("dashboard")
+
+    // ── Administration ────────────────────────────────────────────────────
+    // Every URL below was verified against ngps.smartschool.bd. They map to
+    // the standard module landing pages on the Ramom Smart School backend,
+    // so they work for any tenant without per-school config.
+    Destination.FeesCollect -> WebPage.Authenticated("fees_collect")
+    Destination.FeesInvoice -> WebPage.Authenticated("fees_invoice")
+    Destination.FeesDue -> WebPage.Authenticated("fees_due")
+    Destination.FeesDiscount -> WebPage.Authenticated("fees_discount")
+    Destination.Income -> WebPage.Authenticated("income")
+    Destination.Expense -> WebPage.Authenticated("expense")
+    Destination.Accounting -> WebPage.Authenticated("office_accounting")
+    Destination.ChartOfAccount -> WebPage.Authenticated("chart_of_account")
+    Destination.BankAccount -> WebPage.Authenticated("bank_account")
+    Destination.Payroll -> WebPage.Authenticated("payroll")
+    Destination.AdvanceSalary -> WebPage.Authenticated("advance_salary")
+    Destination.BonusPayment -> WebPage.Authenticated("bonus_payment")
+    Destination.OnlineAdmission -> WebPage.Authenticated("online_admission")
+    Destination.IdCard -> WebPage.Authenticated("id_card")
+    Destination.CertificateTemplate -> WebPage.Authenticated("certificate")
+    Destination.HumanResources -> WebPage.Authenticated("hr")
+    Destination.Reports -> WebPage.Authenticated("report")
+    Destination.Promotion -> WebPage.Authenticated("promotion")
+    Destination.QuestionBank -> WebPage.Authenticated("question_bank")
+    Destination.Alumni -> WebPage.Authenticated("alumni")
+    Destination.Complaint -> WebPage.Authenticated("complaint")
+    Destination.VisitorLog -> WebPage.Authenticated("visitor")
+    Destination.PostalDispatch -> WebPage.Authenticated("postal_dispatch")
+    Destination.PostalReceive -> WebPage.Authenticated("postal_receive")
+    Destination.AdmissionEnquiry -> WebPage.Authenticated("enquiry")
 }

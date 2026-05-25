@@ -55,6 +55,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.schoolnav.app.auth.SessionState
 import com.schoolnav.app.auth.rememberAuthViewModel
+import com.schoolnav.app.ui.components.shimmer
 import com.schoolnav.app.tenant.ActiveTenant
 import com.schoolnav.app.web.WebAssets
 import com.schoolnav.app.web.WebPage
@@ -429,7 +430,8 @@ private fun SkeletonOverlay() {
                     .fillMaxWidth()
                     .height(96.dp)
                     .clip(RoundedCornerShape(14.dp))
-                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)),
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
+                    .shimmer(),
             )
         }
     }
@@ -442,7 +444,8 @@ private fun SkeletonLine(widthFraction: Float, height: androidx.compose.ui.unit.
             .fillMaxWidth(widthFraction)
             .height(height)
             .clip(RoundedCornerShape(8.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)),
+            .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f))
+            .shimmer(),
     )
 }
 

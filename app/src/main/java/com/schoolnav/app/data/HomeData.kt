@@ -6,10 +6,30 @@ import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.LibraryBooks
 import androidx.compose.material.icons.automirrored.filled.Message
+import androidx.compose.material.icons.automirrored.filled.LiveHelp
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.AccountBalance
+import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.Apartment
+import androidx.compose.material.icons.filled.AssignmentInd
+import androidx.compose.material.icons.filled.Badge
 import androidx.compose.material.icons.filled.BeachAccess
+import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.CardMembership
+import androidx.compose.material.icons.filled.ContactMail
+import androidx.compose.material.icons.filled.Diversity3
+import androidx.compose.material.icons.filled.LocalShipping
+import androidx.compose.material.icons.filled.MoveToInbox
+import androidx.compose.material.icons.filled.PointOfSale
+import androidx.compose.material.icons.filled.QuestionAnswer
+import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.Receipt
+import androidx.compose.material.icons.filled.RequestQuote
+import androidx.compose.material.icons.filled.Savings
+import androidx.compose.material.icons.filled.Summarize
+import androidx.compose.material.icons.filled.Upgrade
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Campaign
 import androidx.compose.material.icons.filled.CheckCircle
@@ -157,12 +177,41 @@ object HomeData {
         ),
     )
 
+    val administration = HomeSection(
+        title = "Administration",
+        items = listOf(
+            GridItem("Fees Collect", Icons.Filled.PointOfSale, BrandGreen, Destination.FeesCollect),
+            GridItem("Fees Invoice", Icons.Filled.Receipt, BrandBlue, Destination.FeesInvoice),
+            GridItem("Fees Due", Icons.Filled.RequestQuote, BrandOrange, Destination.FeesDue),
+            GridItem("Income", Icons.AutoMirrored.Filled.TrendingUp, BrandGreen, Destination.Income),
+            GridItem("Expense", Icons.Filled.AccountBalanceWallet, BrandPink, Destination.Expense),
+            GridItem("Accounting", Icons.Filled.AccountBalance, BrandPurple, Destination.Accounting),
+            GridItem("Chart of A/C", Icons.Filled.Summarize, BrandTeal, Destination.ChartOfAccount),
+            GridItem("Bank A/C", Icons.Filled.Savings, BrandBlue, Destination.BankAccount),
+            GridItem("Payroll", Icons.Filled.Payments, BrandGreen, Destination.Payroll),
+            GridItem("ID Card", Icons.Filled.Badge, BrandPurple, Destination.IdCard),
+            GridItem("Certificate", Icons.Filled.CardMembership, BrandTeal, Destination.CertificateTemplate),
+            GridItem("Online Adm.", Icons.Filled.AssignmentInd, BrandOrange, Destination.OnlineAdmission),
+            GridItem("HR", Icons.Filled.Business, BrandBlue, Destination.HumanResources),
+            GridItem("Reports", Icons.Filled.Summarize, BrandPink, Destination.Reports),
+            GridItem("Promotion", Icons.Filled.Upgrade, BrandGreen, Destination.Promotion),
+            GridItem("Question Bank", Icons.Filled.Quiz, BrandPurple, Destination.QuestionBank),
+            GridItem("Alumni", Icons.Filled.Diversity3, BrandTeal, Destination.Alumni),
+            GridItem("Complaints", Icons.Filled.QuestionAnswer, BrandOrange, Destination.Complaint),
+            GridItem("Visitor Log", Icons.Filled.ContactMail, BrandBlue, Destination.VisitorLog),
+            GridItem("Postal Out", Icons.Filled.LocalShipping, BrandPink, Destination.PostalDispatch),
+            GridItem("Postal In", Icons.Filled.MoveToInbox, BrandGreen, Destination.PostalReceive),
+            GridItem("Adm. Enquiry", Icons.AutoMirrored.Filled.LiveHelp, BrandOrange, Destination.AdmissionEnquiry),
+        ),
+    )
+
     val allSections: List<HomeSection> = listOf(
         academic,
         teacher,
         communication,
         resources,
         important,
+        administration,
     )
 
 }
