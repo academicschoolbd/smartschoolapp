@@ -7,19 +7,17 @@ A modern Android app for a school's mobile dashboard, built with **Kotlin + Jetp
 - Splash screen (using `androidx.core.splashscreen`, displays before the activity is fully ready)
 - **Material 3 chrome** that wraps every screen:
   - **Top app bar** with menu/back button and a theme-mode action button
-  - **Navigation drawer** (hamburger menu) with a profile header and every destination grouped by section
+  - **Navigation drawer** (hamburger menu) with a school-branded header and every destination grouped by section
   - **Bottom navigation bar** with Home / Notice / Messages / About root tabs
   - **Extended floating action button** on Home that posts a demo in-app notification
 - **Dark / light / system** theme switching — tap the brightness icon in the top app bar to cycle System → Light → Dark
 - Professional **home dashboard** with:
-  - Greeting header (avatar + name + role badge)
   - Auto-scrolling **top banner** (infinite `HorizontalPager`, 4-second auto-advance, animated indicator)
-  - **Quick-stats** row (Classes Today / Pending Tasks / Attendance % / New Notices)
+  - **Quick-stats** row of public school metrics (Classes Today / Students / Teachers / New Notices)
   - **Recent Notices** horizontal preview strip with category tags
-  - Six grid sections of feature buttons:
+  - Five grid sections of feature buttons:
     - **Academic** — Result, Student List, Class Details, Latest Activity, Class Routine, Exam Routine, Attendance, Assignments, Syllabus
     - **Teacher** — Teacher List, Mark Entry, Attendance, Lesson Plan, Leave Apply, Salary
-    - **Student Corner** — My Profile, My Attendance, My Marks, Fees, ID Card, Library Card
     - **Communication** — Messages, Announcements, Helpline, SMS Alerts, Email, Live Chat
     - **Resources** — Library, Sports, Transport, Hostel, Science Lab, Computer Lab
     - **Important** — Notice, Events, Contact, About, Gallery, Calendar, Holidays, Map
@@ -106,7 +104,7 @@ app/src/main/java/com/schoolnav/app/
     ├── SchoolNavApp.kt              # Root composable: theme + nav graph + floating overlay
     ├── theme/                       # Material 3 colors, typography (Tiro Bangla), ThemeStateHolder
     ├── navigation/                  # Destination enum, bottom tabs, NavHost
-    ├── components/                  # WelcomeHeader, TopBanner, QuickStatsRow, NoticeStrip, GridSection, AppDrawer, BottomNavBar, FloatingNotification
+    ├── components/                  # TopBanner, QuickStatsRow, NoticeStrip, GridSection, AppDrawer, BottomNavBar, FloatingNotification
     └── screens/                     # HomeScreen, DemoScreen
 ```
 

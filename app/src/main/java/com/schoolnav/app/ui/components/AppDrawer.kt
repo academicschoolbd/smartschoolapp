@@ -16,9 +16,10 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -38,19 +39,18 @@ import com.schoolnav.app.ui.navigation.BottomTabs
 import com.schoolnav.app.ui.navigation.Destination
 
 /**
- * Content of the modal navigation drawer. Shows a profile header at the top and
- * then lists every destination grouped by the section it belongs to, plus the
- * bottom-nav tabs at the top. The currently selected route is highlighted using
- * Material 3 `NavigationDrawerItem` semantics.
+ * Content of the modal navigation drawer. Shows a school-branding header at
+ * the top and lists every destination grouped by the section it belongs to,
+ * plus the bottom-nav tabs at the top. The currently selected route is
+ * highlighted using Material 3 `NavigationDrawerItem` semantics.
  */
 @Composable
 fun AppDrawer(
     currentRoute: String?,
     onDestinationClick: (Destination) -> Unit,
     modifier: Modifier = Modifier,
-    profileName: String = "Rahim Ahmed",
-    profileRole: String = "Class IX • Section A",
-    profileInitials: String = "RA",
+    schoolName: String = "School Nav",
+    schoolTagline: String = "Public school dashboard",
 ) {
     ModalDrawerSheet(modifier = modifier.fillMaxSize()) {
         Column(
@@ -59,11 +59,7 @@ fun AppDrawer(
                 .verticalScroll(rememberScrollState())
                 .windowInsetsPadding(WindowInsets.statusBars),
         ) {
-            DrawerHeader(
-                name = profileName,
-                role = profileRole,
-                initials = profileInitials,
-            )
+            DrawerHeader(name = schoolName, tagline = schoolTagline)
             Spacer(modifier = Modifier.height(8.dp))
 
             DrawerGroupLabel("Main")
@@ -95,7 +91,7 @@ fun AppDrawer(
 }
 
 @Composable
-private fun DrawerHeader(name: String, role: String, initials: String) {
+private fun DrawerHeader(name: String, tagline: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -106,45 +102,32 @@ private fun DrawerHeader(name: String, role: String, initials: String) {
             Box(
                 modifier = Modifier
                     .size(56.dp)
-                    .clip(CircleShape)
+                    .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.18f)),
                 contentAlignment = Alignment.Center,
             ) {
-                Text(
-                    text = initials,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    fontWeight = FontWeight.Bold,
+                Icon(
+                    imageVector = Icons.Filled.School,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
             }
             Spacer(modifier = Modifier.width(14.dp))
-            Column(modifier = Modifier.weight(1f)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
                 Text(
                     text = name,
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.SemiBold,
                 )
-                Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = role,
+                    text = tagline,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f),
                 )
-                Spacer(modifier = Modifier.height(6.dp))
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.15f))
-                        .padding(horizontal = 8.dp, vertical = 3.dp),
-                ) {
-                    Text(
-                        text = "School Nav",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
             }
         }
     }

@@ -2,9 +2,9 @@ package com.schoolnav.app.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.PendingActions
+import androidx.compose.material.icons.filled.School
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.schoolnav.app.ui.navigation.Destination
@@ -41,18 +41,18 @@ object DashboardData {
             destination = Destination.ClassRoutine,
         ),
         QuickStat(
-            label = "Pending\nTasks",
-            value = "3",
-            icon = Icons.Filled.PendingActions,
-            tint = BrandOrange,
-            destination = Destination.Assignments,
+            label = "Students",
+            value = "1,240",
+            icon = Icons.Filled.Groups,
+            tint = BrandGreen,
+            destination = Destination.StudentList,
         ),
         QuickStat(
-            label = "Attendance",
-            value = "92%",
-            icon = Icons.Filled.CheckCircle,
-            tint = BrandGreen,
-            destination = Destination.MyAttendance,
+            label = "Teachers",
+            value = "64",
+            icon = Icons.Filled.School,
+            tint = BrandOrange,
+            destination = Destination.TeacherList,
         ),
         QuickStat(
             label = "New\nNotices",

@@ -34,14 +34,6 @@ enum class Destination(val route: String, val title: String) {
     LeaveApply(route = "teacher/leave_apply", title = "Leave Apply"),
     Salary(route = "teacher/salary", title = "Salary"),
 
-    // Student Corner
-    MyProfile(route = "student/profile", title = "My Profile"),
-    MyAttendance(route = "student/attendance", title = "My Attendance"),
-    MyMarks(route = "student/marks", title = "My Marks"),
-    Fees(route = "student/fees", title = "Fees"),
-    IdCard(route = "student/id_card", title = "ID Card"),
-    LibraryCard(route = "student/library_card", title = "Library Card"),
-
     // Communication
     Messages(route = "communication/messages", title = "Messages"),
     Announcements(route = "communication/announcements", title = "Announcements"),
