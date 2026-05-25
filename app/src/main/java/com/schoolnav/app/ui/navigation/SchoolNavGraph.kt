@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.schoolnav.app.ui.screens.FacilityInfoScreen
+import com.schoolnav.app.ui.screens.FacilityProfiles
 import com.schoolnav.app.ui.screens.HomeScreen
 import com.schoolnav.app.ui.screens.LoginScreen
 import com.schoolnav.app.ui.screens.WebFeatureScreen
@@ -46,10 +48,18 @@ fun SchoolNavGraph(
             .filter { it != Destination.Home && it != Destination.Login }
             .forEach { dest ->
                 composable(dest.route) {
-                    WebFeatureScreen(
-                        page = dest.webPage(),
-                        onRequestLogin = { onNavigate(Destination.Login) },
-                    )
+                    val facility = FacilityProfiles.forDestination(dest)
+                    if (facility != null) {
+                        FacilityInfoScreen(
+                            profile = facility,
+                            onOpenGallery = { onNavigate(Destination.Gallery) },
+                        )
+                    } else {
+                        WebFeatureScreen(
+                            page = dest.webPage(),
+                            onRequestLogin = { onNavigate(Destination.Login) },
+                        )
+                    }
                 }
             }
     }
