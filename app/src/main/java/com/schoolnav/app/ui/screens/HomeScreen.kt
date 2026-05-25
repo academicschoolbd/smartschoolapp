@@ -6,9 +6,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.schoolnav.app.auth.SessionState
+import com.schoolnav.app.auth.rememberAuthViewModel
+import com.schoolnav.app.data.DashboardData
 import com.schoolnav.app.data.HomeData
+import com.schoolnav.app.web.isVisibleWithoutAuth
 import com.schoolnav.app.ui.components.GridSection
 import com.schoolnav.app.ui.components.NoticeStrip
 import com.schoolnav.app.ui.components.QuickStatsRow
@@ -29,20 +36,33 @@ import com.schoolnav.app.ui.navigation.Destination
  */
 @Composable
 fun HomeScreen(onNavigate: (Destination) -> Unit) {
+    val session by rememberAuthViewModel().session.collectAsState()
+    val isSignedIn = session is SessionState.SignedIn
+    val sections = remember(isSignedIn) { HomeData.sectionsFor(isSignedIn) }
+    val quickStats = remember(isSignedIn) {
+        if (isSignedIn) {
+            DashboardData.quickStats
+        } else {
+            DashboardData.quickStats.filter { it.destination.isVisibleWithoutAuth() }
+        }
+    }
+
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(top = 8.dp, bottom = 96.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
     ) {
         item { TopBanner(items = HomeData.bannerItems) }
-        item { QuickStatsRow(onItemClick = onNavigate) }
+        if (quickStats.isNotEmpty()) {
+            item { QuickStatsRow(stats = quickStats, onItemClick = onNavigate) }
+        }
         item {
             NoticeStrip(
                 onSeeAllClick = { onNavigate(Destination.NoticeBoard) },
                 onNoticeClick = { onNavigate(Destination.NoticeBoard) },
             )
         }
-        items(HomeData.allSections) { section ->
+        items(sections) { section ->
             GridSection(
                 section = section,
                 onItemClick = { item -> onNavigate(item.destination) },

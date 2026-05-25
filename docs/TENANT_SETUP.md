@@ -170,6 +170,15 @@ clean "Coming soon" placeholder.
   in the quick-actions FAB. It calls Google's Play In-App Review API; on
   side-loaded or non-Play builds it falls back to opening the Play Store
   listing for the package.
+- **Public vs. authenticated views** — Signed-out visitors only see the public
+  side of the portal: News, Teachers, Gallery, About, Contact, Exam Results,
+  Admit Card, Principal Message, Calendar pages that don't require login, etc.
+  The whole **Teacher** and **Administration** sections, plus every other
+  auth-gated tile (Mark Entry, Salary, Fees, Accounting, Payroll, …) and the
+  authenticated quick-stats (Classes Today, Students), disappear from the home
+  grid + the drawer until the user signs in. The Sign in entry leads them to
+  the native login screen; the full set of features appears as soon as the
+  session is established.
 - **Animated shimmer skeleton** — While a WebView page loads, the placeholder
   cards run a diagonal highlight sweep (`Modifier.shimmer()` in
   [`Shimmer.kt`](../app/src/main/java/com/schoolnav/app/ui/components/Shimmer.kt))

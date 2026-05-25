@@ -51,6 +51,19 @@ val WebPage.requiresAuth: Boolean
     get() = this is WebPage.Authenticated
 
 /**
+ * Whether a destination is safe to surface to a signed-out user. Authenticated
+ * pages disappear from the home grid + drawer until the user signs in, so the
+ * public side of the app never advertises features the user can't reach.
+ *
+ * Login itself is special-cased — it's auth-related but obviously needs to be
+ * visible when signed out.
+ */
+fun Destination.isVisibleWithoutAuth(): Boolean {
+    if (this == Destination.Login) return true
+    return !webPage().requiresAuth
+}
+
+/**
  * Maps every [Destination] to its backend page.
  *
  * URL inventory was confirmed against `https://ngps.smartschool.bd` — see
