@@ -13,7 +13,7 @@ import androidx.compose.material.icons.filled.SettingsBrightness
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -148,21 +148,23 @@ fun SchoolNavApp(onAppReady: () -> Unit = {}) {
                         },
                         floatingActionButton = {
                             if (currentRoute == Destination.Home.route) {
-                                FloatingActionButton(
+                                ExtendedFloatingActionButton(
                                     onClick = {
                                         FloatingNotificationCenter.post(
                                             title = "Demo notification",
                                             body = "This is what an in-app floating notification looks like.",
                                         )
                                     },
+                                    icon = {
+                                        Icon(
+                                            imageVector = Icons.Filled.NotificationsActive,
+                                            contentDescription = null,
+                                        )
+                                    },
+                                    text = { Text(text = "Notify") },
                                     containerColor = MaterialTheme.colorScheme.primary,
                                     contentColor = MaterialTheme.colorScheme.onPrimary,
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Filled.NotificationsActive,
-                                        contentDescription = "Send demo notification",
-                                    )
-                                }
+                                )
                             }
                         },
                         containerColor = MaterialTheme.colorScheme.background,
