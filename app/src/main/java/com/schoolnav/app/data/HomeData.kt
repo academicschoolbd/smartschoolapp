@@ -57,6 +57,7 @@ import androidx.compose.material.icons.filled.Timer
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.schoolnav.app.ui.navigation.Destination
+import com.schoolnav.app.web.isVisibleWithoutAuth
 import com.schoolnav.app.ui.theme.BrandBlue
 import com.schoolnav.app.ui.theme.BrandGreen
 import com.schoolnav.app.ui.theme.BrandOrange
@@ -213,5 +214,18 @@ object HomeData {
         important,
         administration,
     )
+
+    /**
+     * Sections to render given the current auth state. When the user is signed
+     * out we drop every auth-gated tile and any section that becomes empty as a
+     * result. Signed-in users see the full set.
+     */
+    fun sectionsFor(isSignedIn: Boolean): List<HomeSection> {
+        if (isSignedIn) return allSections
+        return allSections.mapNotNull { section ->
+            val publicOnly = section.items.filter { it.destination.isVisibleWithoutAuth() }
+            if (publicOnly.isEmpty()) null else section.copy(items = publicOnly)
+        }
+    }
 
 }

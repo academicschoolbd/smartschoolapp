@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.schoolnav.app.data.HomeData
 import com.schoolnav.app.ui.navigation.BottomTabs
 import com.schoolnav.app.ui.navigation.Destination
+import com.schoolnav.app.web.isVisibleWithoutAuth
 
 /**
  * Content of the modal navigation drawer. Shows a school-branding header at
@@ -101,15 +102,19 @@ fun AppDrawer(
 
             DrawerGroupLabel("Main")
             BottomTabs.forEach { tab ->
-                DrawerItem(
-                    label = tab.destination.title,
-                    icon = tab.icon,
-                    selected = currentRoute == tab.destination.route,
-                    onClick = { onDestinationClick(tab.destination) },
-                )
+                // Hide bottom-tab destinations that require auth from signed-out users
+                // (e.g. a personal-dashboard tab). The Home tab itself is always public.
+                if (isSignedIn || tab.destination.isVisibleWithoutAuth()) {
+                    DrawerItem(
+                        label = tab.destination.title,
+                        icon = tab.icon,
+                        selected = currentRoute == tab.destination.route,
+                        onClick = { onDestinationClick(tab.destination) },
+                    )
+                }
             }
 
-            HomeData.allSections.forEach { section ->
+            HomeData.sectionsFor(isSignedIn = isSignedIn).forEach { section ->
                 HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
                 DrawerGroupLabel(section.title)
                 section.items.forEach { item ->
