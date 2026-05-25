@@ -84,4 +84,19 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.firebase.analytics.ktx)
+
+    // Network — used by the native login flow that POSTs /authentication on the Ramom Smart School backend
+    implementation(libs.okhttp)
+
+    // Persistent session storage (auth cookie, last-known user)
+    implementation(libs.androidx.datastore.preferences)
+
+    // Modern WebView APIs (WebViewCompat, dark-mode CSS, settings.userAgentMetadata, …)
+    implementation(libs.androidx.webkit)
+
+    // ViewModel for the auth state holder consumed from Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Swipe-to-refresh wrapping the WebView in each feature screen
+    implementation(libs.androidx.swiperefreshlayout)
 }

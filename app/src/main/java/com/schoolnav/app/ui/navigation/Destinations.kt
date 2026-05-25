@@ -59,6 +59,22 @@ enum class Destination(val route: String, val title: String) {
     Calendar(route = "important/calendar", title = "Calendar"),
     Holidays(route = "important/holidays", title = "Holidays"),
     Map(route = "important/map", title = "Map"),
+
+    // Extra public/private screens reachable via the navigation drawer
+    // (handy on Ramom Smart School tenants that expose them).
+    Principal(route = "school/principal", title = "Principal Message"),
+    Chairperson(route = "school/chairperson", title = "Chairperson"),
+    Admission(route = "school/admission", title = "Admission"),
+    Certificates(route = "school/certificates", title = "Certificates"),
+    Video(route = "school/video", title = "Video Gallery"),
+    Homework(route = "user/homework", title = "Homework"),
+    StudyMaterial(route = "user/study_material", title = "Study Material"),
+    OnlineExam(route = "user/online_exam", title = "Online Exam"),
+    Profile(route = "user/profile", title = "My Profile"),
+    Dashboard(route = "user/dashboard", title = "Dashboard"),
+
+    // Auth flow
+    Login(route = "auth/login", title = "Sign in"),
     ;
 
     companion object {

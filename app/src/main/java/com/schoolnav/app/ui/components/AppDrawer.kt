@@ -19,6 +19,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Login
+import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.School
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -43,6 +46,10 @@ import com.schoolnav.app.ui.navigation.Destination
  * the top and lists every destination grouped by the section it belongs to,
  * plus the bottom-nav tabs at the top. The currently selected route is
  * highlighted using Material 3 `NavigationDrawerItem` semantics.
+ *
+ * A small **account section** at the very top reflects whether the user is
+ * signed into the Ramom Smart School portal — tapping it routes to the
+ * native [com.schoolnav.app.ui.screens.LoginScreen] (or signs out).
  */
 @Composable
 fun AppDrawer(
@@ -51,6 +58,10 @@ fun AppDrawer(
     modifier: Modifier = Modifier,
     schoolName: String = "School Nav",
     schoolTagline: String = "Public school dashboard",
+    isSignedIn: Boolean = false,
+    signedInDisplayName: String? = null,
+    onSignInClick: () -> Unit = {},
+    onSignOutClick: () -> Unit = {},
 ) {
     ModalDrawerSheet(modifier = modifier.fillMaxSize()) {
         Column(
@@ -61,6 +72,30 @@ fun AppDrawer(
         ) {
             DrawerHeader(name = schoolName, tagline = schoolTagline)
             Spacer(modifier = Modifier.height(8.dp))
+
+            DrawerGroupLabel("Account")
+            if (isSignedIn) {
+                DrawerItem(
+                    label = signedInDisplayName ?: "Signed in",
+                    icon = Icons.Filled.AccountCircle,
+                    selected = false,
+                    onClick = { onDestinationClick(Destination.Profile) },
+                )
+                DrawerItem(
+                    label = "Sign out",
+                    icon = Icons.AutoMirrored.Filled.Logout,
+                    selected = false,
+                    onClick = onSignOutClick,
+                )
+            } else {
+                DrawerItem(
+                    label = "Sign in",
+                    icon = Icons.AutoMirrored.Filled.Login,
+                    selected = currentRoute == Destination.Login.route,
+                    onClick = onSignInClick,
+                )
+            }
+            HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
 
             DrawerGroupLabel("Main")
             BottomTabs.forEach { tab ->
