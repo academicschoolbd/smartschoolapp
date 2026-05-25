@@ -23,6 +23,7 @@ import androidx.compose.material.icons.automirrored.filled.Login
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -62,6 +63,7 @@ fun AppDrawer(
     signedInDisplayName: String? = null,
     onSignInClick: () -> Unit = {},
     onSignOutClick: () -> Unit = {},
+    onRateClick: () -> Unit = {},
 ) {
     ModalDrawerSheet(modifier = modifier.fillMaxSize()) {
         Column(
@@ -119,6 +121,15 @@ fun AppDrawer(
                     )
                 }
             }
+
+            HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp))
+            DrawerGroupLabel("More")
+            DrawerItem(
+                label = "Rate us",
+                icon = Icons.Filled.Star,
+                selected = false,
+                onClick = onRateClick,
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
         }

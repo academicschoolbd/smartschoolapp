@@ -73,6 +73,33 @@ enum class Destination(val route: String, val title: String) {
     Profile(route = "user/profile", title = "My Profile"),
     Dashboard(route = "user/dashboard", title = "Dashboard"),
 
+    // Administration (admin / staff modules)
+    FeesCollect(route = "admin/fees_collect", title = "Fees Collect"),
+    FeesInvoice(route = "admin/fees_invoice", title = "Fees Invoice"),
+    FeesDue(route = "admin/fees_due", title = "Fees Due"),
+    FeesDiscount(route = "admin/fees_discount", title = "Fees Discount"),
+    Income(route = "admin/income", title = "Income"),
+    Expense(route = "admin/expense", title = "Expense"),
+    Accounting(route = "admin/accounting", title = "Office Accounting"),
+    ChartOfAccount(route = "admin/chart_of_account", title = "Chart of Accounts"),
+    BankAccount(route = "admin/bank_account", title = "Bank Accounts"),
+    Payroll(route = "admin/payroll", title = "Payroll"),
+    AdvanceSalary(route = "admin/advance_salary", title = "Advance Salary"),
+    BonusPayment(route = "admin/bonus", title = "Bonus Payment"),
+    OnlineAdmission(route = "admin/online_admission", title = "Online Admission"),
+    IdCard(route = "admin/id_card", title = "ID Card"),
+    CertificateTemplate(route = "admin/certificate_template", title = "Certificate Template"),
+    HumanResources(route = "admin/hr", title = "Human Resources"),
+    Reports(route = "admin/report", title = "Reports"),
+    Promotion(route = "admin/promotion", title = "Promotion"),
+    QuestionBank(route = "admin/question_bank", title = "Question Bank"),
+    Alumni(route = "admin/alumni", title = "Alumni"),
+    Complaint(route = "admin/complaint", title = "Complaints"),
+    VisitorLog(route = "admin/visitor", title = "Visitor Log"),
+    PostalDispatch(route = "admin/postal_dispatch", title = "Postal Dispatch"),
+    PostalReceive(route = "admin/postal_receive", title = "Postal Receive"),
+    AdmissionEnquiry(route = "admin/enquiry", title = "Admission Enquiry"),
+
     // Auth flow
     Login(route = "auth/login", title = "Sign in"),
     ;

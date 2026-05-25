@@ -128,6 +128,53 @@ clean "Coming soon" placeholder.
 | Holidays       | `<host>/holiday`                                | 🔒   |
 | Map            | `<host>/<slug>/contact` (embedded map widget)   |      |
 
+### Administration
+
+| Button          | Backend page                  | Auth |
+| --------------- | ----------------------------- | ---- |
+| Fees Collect    | `<host>/fees_collect`         | 🔒   |
+| Fees Invoice    | `<host>/fees_invoice`         | 🔒   |
+| Fees Due        | `<host>/fees_due`             | 🔒   |
+| Income          | `<host>/income`               | 🔒   |
+| Expense         | `<host>/expense`              | 🔒   |
+| Accounting      | `<host>/office_accounting`    | 🔒   |
+| Chart of A/C    | `<host>/chart_of_account`     | 🔒   |
+| Bank A/C        | `<host>/bank_account`         | 🔒   |
+| Payroll         | `<host>/payroll`              | 🔒   |
+| ID Card         | `<host>/id_card`              | 🔒   |
+| Certificate     | `<host>/certificate`          | 🔒   |
+| Online Adm.     | `<host>/online_admission`     | 🔒   |
+| HR              | `<host>/hr`                   | 🔒   |
+| Reports         | `<host>/report`               | 🔒   |
+| Promotion       | `<host>/promotion`            | 🔒   |
+| Question Bank   | `<host>/question_bank`        | 🔒   |
+| Alumni          | `<host>/alumni`               | 🔒   |
+| Complaints      | `<host>/complaint`            | 🔒   |
+| Visitor Log     | `<host>/visitor`              | 🔒   |
+| Postal Out      | `<host>/postal_dispatch`      | 🔒   |
+| Postal In       | `<host>/postal_receive`       | 🔒   |
+| Adm. Enquiry    | `<host>/enquiry`              | 🔒   |
+
+## Extras shipped with this APK
+
+- **Double-tap to exit** — On the Home screen, the first system-back press
+  shows a "Press back again to exit" toast; a second press within 2 s exits.
+  Other screens use the normal back-stack semantics, so back never traps the
+  user inside a WebView page.
+- **Quick-actions FAB (speed-dial)** — The home screen's floating action
+  button expands into a context-aware shortcut menu: signed-out users see
+  `Notices · Contact · Sign in · Rate the app`; signed-in users see
+  `Notices · Dashboard · My profile · Rate the app`. Tapping the scrim
+  collapses the dial.
+- **In-app rating** — `Rate us` lives both in the drawer's *More* section and
+  in the quick-actions FAB. It calls Google's Play In-App Review API; on
+  side-loaded or non-Play builds it falls back to opening the Play Store
+  listing for the package.
+- **Animated shimmer skeleton** — While a WebView page loads, the placeholder
+  cards run a diagonal highlight sweep (`Modifier.shimmer()` in
+  [`Shimmer.kt`](../app/src/main/java/com/schoolnav/app/ui/components/Shimmer.kt))
+  so the user gets a clearly *loading* signal instead of a static grey block.
+
 The full mapping table lives in
 [`app/src/main/java/com/schoolnav/app/web/WebDestinations.kt`](../app/src/main/java/com/schoolnav/app/web/WebDestinations.kt).
 If a tenant exposes extra pages, add a new `Destination` enum entry and a
